@@ -113,28 +113,25 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 navigationController.navigationBar.backgroundColor = UIColor(red: 36, green: 38, blue: 43, alpha: 1)
                 navigationController.navigationBar.barTintColor = UIColor(red: 36, green: 38, blue: 43, alpha: 1)
                 
-                let navigationItem = UINavigationItem(title: "Назад")
-                if #available(iOS 13.0, *) {
-                    navigationItem.leftBarButtonItem = UIBarButtonItem(
-                        barButtonSystemItem: .close,
-                        target: safariVC,
-                        action: #selector(safariVC.close(result:))
-                    )
-                } else {
-                    navigationItem.leftBarButtonItem = UIBarButtonItem(
-                        barButtonSystemItem: .cancel,
-                        target: safariVC,
-                        action: #selector(safariVC.close(result:))
-                    )
-                }
-                DispatchQueue.main.sync {
-                    navigationController.navigationBar.setItems([navigationItem], animated: false)
-                }
-                
                 navigationController.modalPresentationStyle = .fullScreen
                 safariVC.title = "Треснутые"
-
+                
                 flutterViewController.present(navigationController, animated: true) {
+                    DispatchQueue.main.sync {
+                        if #available(iOS 13.0, *) {
+                            navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                                barButtonSystemItem: .close,
+                                target: safariVC,
+                                action: #selector(safariVC.close(result:))
+                            )
+                        } else {
+                            navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                                barButtonSystemItem: .cancel,
+                                target: safariVC,
+                                action: #selector(safariVC.close(result:))
+                            )
+                        }
+                    }
                     result(true)
                 }
             }
