@@ -90,40 +90,25 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 safariVC.prepareSafariBrowser()
                 
                 let navigationController = UINavigationController(rootViewController: safariVC)
-//                navigationController.title = "Треснутые"
-//                navigationController.navigationBar.tintColor = .white
-//                navigationController.navigationBar.backgroundColor = .darkGray
-//                navigationController.navigationBar.barTintColor = .darkGray
-////                navigationController.navigationBar.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+                
+                navigationController.navigationBar.tintColor = .white
+                navigationController.navigationBar.backgroundColor = .darkGray
+                navigationController.navigationBar.barTintColor = .darkGray
+                
 //                if #available(iOS 13.0, *) {
-//                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+//                    let item = UIBarButtonItem(
 //                        barButtonSystemItem: .close,
 //                        target: safariVC,
-//                        action: #selector(safariVC.close(result:))
-//                    )
+//                        action: #selector(safariVC.close(result:)))
+//                    item.tintColor = .white
+//                    safariVC.navigationItem.rightBarButtonItem = item
 //                } else {
-//                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+//                    safariVC.navigationItem.rightBarButtonItem = UIBarButtonItem(
 //                        barButtonSystemItem: .cancel,
 //                        target: safariVC,
 //                        action: #selector(safariVC.close(result:))
 //                    )
 //                }
-                navigationController.navigationBar.tintColor = .white
-                navigationController.navigationBar.backgroundColor = .darkGray
-                navigationController.navigationBar.barTintColor = .darkGray
-                
-                if #available(iOS 13.0, *) {
-                    let item = UIBarButtonItem(
-                        title: "Закрыть", style: .done, target: safariVC, action: #selector(safariVC.close(result:)))
-                    item.tintColor = .white
-                    navigationController.navigationItem.rightBarButtonItem = item
-                } else {
-                    navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                        barButtonSystemItem: .cancel,
-                        target: safariVC,
-                        action: #selector(safariVC.close(result:))
-                    )
-                }
                 
                 navigationController.modalPresentationStyle = .currentContext
                 safariVC.title = "Треснутые"

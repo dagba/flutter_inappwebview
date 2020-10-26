@@ -41,6 +41,18 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         }
     }
     
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let item = UIBarButtonItem(
+            title: "Закрыть",
+            style: .done,
+            target: self,
+            action: #selector(self.close(result:)))
+        item.tintColor = .white
+        navigationItem.rightBarButtonItem = item
+    }
+    
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         onChromeSafariBrowserOpened()
@@ -59,11 +71,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        var frame = view.frame
-//        let OffsetY: CGFloat = 64
-//        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-//        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
-//        view.frame = frame
+        var frame = view.frame
+        let OffsetY: CGFloat = 64
+        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
+        view.frame = frame
     }
     
     
