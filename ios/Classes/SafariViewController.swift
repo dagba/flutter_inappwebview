@@ -41,8 +41,9 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         }
     }
     
-    public override func viewDidLoad() {
-        super.viewDidLoad()
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        onChromeSafariBrowserOpened()
         
         navigationController?.title = "Треснутые"
         navigationController?.navigationBar.tintColor = .white
@@ -61,32 +62,6 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
                 action: #selector(self.close(result:))
             )
         }
-        
-        //        navigationController?.title = "Треснутые"
-//        navigationController?.navigationBar.tintColor = .white
-//        navigationController?.navigationBar.barTintColor = UIColor(red: 36, green: 38, blue: 43, alpha: 1)
-//        let items: [UINavigationItem]? = [UINavigationItem(title: "Треснутые")]
-//
-//        if #available(iOS 13.0, *) {
-//            items?.first?.leftBarButtonItem = UIBarButtonItem(
-//                barButtonSystemItem: .close,
-//                target: self,
-//                action: #selector(self.close(result:))
-//            )
-//        } else {
-//            items?.first?.leftBarButtonItem = UIBarButtonItem(
-//                barButtonSystemItem: .cancel,
-//                target: self,
-//                action: #selector(self.close(result:))
-//            )
-//        }
-//
-//        navigationController?.navigationBar.items = items
-    }
-    
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        onChromeSafariBrowserOpened()
     }
     
     public override func viewDidDisappear(_ animated: Bool) {
