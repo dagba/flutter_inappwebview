@@ -91,6 +91,7 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 
                 let navigationController = UINavigationController(rootViewController: safari)
                 navigationController.title = "Треснутые"
+                navigationController.navigationBar.backgroundColor = .clear
 
                 flutterViewController.present(navigationController, animated: true) {
                     var frame = safari.view.frame
