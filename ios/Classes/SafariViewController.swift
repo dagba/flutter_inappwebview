@@ -49,11 +49,17 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         // prepareSafariBrowser()
         super.viewWillAppear(animated)
         
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: nil, action: #selector(self.close(result:)))
-        } else {
-            // Fallback on earlier versions
-        }
+        navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: nil,
+            action: #selector(self.close(result:))
+        )
+        
+        var frame = view.frame
+        let OffsetY: CGFloat = 64
+        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
+        view.frame = frame
         
         onChromeSafariBrowserOpened()
     }
@@ -67,11 +73,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-//        var frame = view.frame
-//        let OffsetY: CGFloat  = 64
-//        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-//        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
-//        view.frame = frame
+        var frame = view.frame
+        let OffsetY: CGFloat = 64
+        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
+        view.frame = frame
     }
     
     
