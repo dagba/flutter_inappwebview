@@ -94,6 +94,7 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 navigationController.title = "Треснутые"
                 navigationController.navigationBar.tintColor = .white
                 navigationController.navigationBar.backgroundColor = .darkGray
+                navigationController.navigationBar.barTintColor = .darkGray
 //                navigationController.navigationBar.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
                 if #available(iOS 13.0, *) {
                     navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
