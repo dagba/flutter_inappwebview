@@ -91,14 +91,10 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 
                 let navigationController = UINavigationController(rootViewController: safari)
                 navigationController.title = "Треснутые"
-                navigationController.navigationBar.backgroundColor = .clear
+                
+                safari.title = "Треснутые"
 
                 flutterViewController.present(navigationController, animated: true) {
-                    var frame = safari.view.frame
-                    let OffsetY: CGFloat  = 64
-                    frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-                    frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2))
-                    safari.view.frame = frame
                     result(true)
                 }
             }

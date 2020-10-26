@@ -20,12 +20,22 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         
     }
     
-    //    override func prefersStatusBarHidden() -> Bool {
-    //    return true
-    //}
-    
     deinit {
         print("SafariViewController - dealloc")
+    }
+    
+    @objc func close(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: nil, action: #selector(self.close(result:)))
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     public func prepareMethodChannel() {
@@ -57,6 +67,14 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         self.dispose()
     }
     
+    public override func viewWillLayoutSubviews() {
+        var frame = view.frame
+        let OffsetY: CGFloat  = 64
+        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
+        view.frame = frame
+    }
+    
     
     func prepareSafariBrowser() {
         if #available(iOS 11.0, *) {
@@ -77,7 +95,7 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         self.modalTransitionStyle = UIModalTransitionStyle(rawValue: (safariOptions?.transitionStyle)!)!
     }
     
-    func close(result: FlutterResult?) {
+    @objc func close(result: FlutterResult?) {
         dismiss(animated: true)
         
         // wait for the animation
