@@ -117,21 +117,21 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 safariVC.title = "Треснутые"
                 
                 flutterViewController.present(navigationController, animated: true) {
-                    DispatchQueue.main.sync {
-                        if #available(iOS 13.0, *) {
-                            navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                                barButtonSystemItem: .close,
-                                target: safariVC,
-                                action: #selector(safariVC.close(result:))
-                            )
-                        } else {
-                            navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                                barButtonSystemItem: .cancel,
-                                target: safariVC,
-                                action: #selector(safariVC.close(result:))
-                            )
-                        }
-                    }
+//                    DispatchQueue.main.sync {
+//                        if #available(iOS 13.0, *) {
+//                            navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+//                                barButtonSystemItem: .close,
+//                                target: safariVC,
+//                                action: #selector(safariVC.close(result:))
+//                            )
+//                        } else {
+//                            navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+//                                barButtonSystemItem: .cancel,
+//                                target: safariVC,
+//                                action: #selector(safariVC.close(result:))
+//                            )
+//                        }
+//                    }
                     result(true)
                 }
             }
