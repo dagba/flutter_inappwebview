@@ -87,7 +87,6 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 safariVC.prepareMethodChannel()
                 safariVC.delegate = safariVC
                 safariVC.safariOptions = safariOptions
-                safariVC.title = "Треснутые"
                 safariVC.prepareSafariBrowser()
                 
                 let navigationController = UINavigationController(rootViewController: safariVC)
@@ -110,6 +109,7 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
 //                    )
 //                }
                 navigationController.modalPresentationStyle = .fullScreen
+                safariVC.title = "Треснутые"
 
                 flutterViewController.present(navigationController, animated: true) {
                     result(true)
