@@ -47,13 +47,16 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         
         navigationController?.title = "Треснутые"
         navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.backgroundColor = .darkGray
-        navigationController?.navigationBar.barTintColor = .darkGray
-        //                navigationController.navigationBar.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+        navigationController?.navigationBar.barTintColor = UIColor(red: 36, green: 38, blue: 43, alpha: 1)
+        let items: [UINavigationItem]? = [UINavigationItem(title: "Назад")]
+        navigationController?.navigationBar.setItems(items, animated: false)
+//        //                navigationController.navigationBar.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
         if #available(iOS 13.0, *) {
-            navigationController?.navigationItem.setRightBarButton(UIBarButtonItem(
-                title: "Назад", style:  .done, target: self, action: #selector(self.close(result:))
-            ), animated: false)
+            items?.first?.leftBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .close,
+                target: self,
+                action: #selector(self.close(result:))
+            )
         } else {
             navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(
                 barButtonSystemItem: .cancel,
