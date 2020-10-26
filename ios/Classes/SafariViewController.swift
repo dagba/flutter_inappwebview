@@ -43,7 +43,6 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         onChromeSafariBrowserOpened()
     }
     
