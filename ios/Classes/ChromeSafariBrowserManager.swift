@@ -75,7 +75,7 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                     let config = SFSafariViewController.Configuration()
                     config.entersReaderIfAvailable = true
                     config.barCollapsingEnabled = true
-                    safariVC.preferredControlTintColor = .orange
+//                    safari.preferredControlTintColor = .orange
 
                     safari = SafariViewController(url: absoluteUrl, configuration: config)
                 } else {

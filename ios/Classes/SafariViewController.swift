@@ -20,9 +20,9 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
 
     }
 
-    override func prefersStatusBarHidden() -> Bool {
-    return true
-}
+//    override func prefersStatusBarHidden() -> Bool {
+//    return true
+//}
 
     deinit {
         print("SafariViewController - dealloc")
@@ -53,11 +53,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
 
         public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-                                    var frame = safari.view.frame
+                                    var frame = view.frame
     let OffsetY: CGFloat  = 64
     frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
     frame.size = CGSize(width: frame.width, height: frame.height + OffsetY)
-    safari.view.frame = frame
+    view.frame = frame
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
