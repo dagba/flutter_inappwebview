@@ -74,7 +74,7 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         var frame = view.frame
         let OffsetY: CGFloat = 64
         frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
+        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.25))
         view.frame = frame
     }
     
