@@ -91,20 +91,20 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 
                 let navigationController = UINavigationController(rootViewController: safariVC)
                 navigationController.title = "Треснутые"
-//                navigationController.navigationBar.tintColor = .blue
-//                if #available(iOS 13.0, *) {
-//                    navigationController.navigationItem.backBarButtonItem = UIBarButtonItem(
-//                        barButtonSystemItem: .close,
-//                        target: safariVC,
-//                        action: #selector(safariVC.close(result:))
-//                    )
-//                } else {
-//                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
-//                        barButtonSystemItem: .cancel,
-//                        target: safariVC,
-//                        action: #selector(safariVC.close(result:))
-//                    )
-//                }
+                navigationController.navigationBar.tintColor = .blue
+                if #available(iOS 13.0, *) {
+                    navigationController.navigationItem.backBarButtonItem = UIBarButtonItem(
+                        barButtonSystemItem: .close,
+                        target: safariVC,
+                        action: #selector(safariVC.close(result:))
+                    )
+                } else {
+                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+                        barButtonSystemItem: .cancel,
+                        target: safariVC,
+                        action: #selector(safariVC.close(result:))
+                    )
+                }
                 
                 safariVC.title = "Треснутые"
 
