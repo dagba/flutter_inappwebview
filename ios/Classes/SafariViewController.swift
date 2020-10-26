@@ -51,6 +51,8 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
             action: #selector(self.close(result:)))
         item.tintColor = .white
         navigationItem.rightBarButtonItem = item
+        
+        view.backgroundColor = .darkGray
     }
     
     public override func viewWillAppear(_ animated: Bool) {
