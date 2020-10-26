@@ -113,25 +113,22 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 navigationController.navigationBar.backgroundColor = .darkGray
                 navigationController.navigationBar.barTintColor = .darkGray
                 
-                navigationController.modalPresentationStyle = .fullScreen
+                if #available(iOS 13.0, *) {
+                    navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                        title: "Назад", style: .done, target: safariVC, action: #selector(safariVC.close(result:))
+                    )
+                } else {
+                    navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                        barButtonSystemItem: .cancel,
+                        target: safariVC,
+                        action: #selector(safariVC.close(result:))
+                    )
+                }
+                
+                navigationController.modalPresentationStyle = .currentContext
                 safariVC.title = "Треснутые"
                 
                 flutterViewController.present(navigationController, animated: true) {
-//                    DispatchQueue.main.sync {
-//                        if #available(iOS 13.0, *) {
-//                            navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
-//                                barButtonSystemItem: .close,
-//                                target: safariVC,
-//                                action: #selector(safariVC.close(result:))
-//                            )
-//                        } else {
-//                            navigationController.navigationItem.rightBarButtonItem = UIBarButtonItem(
-//                                barButtonSystemItem: .cancel,
-//                                target: safariVC,
-//                                action: #selector(safariVC.close(result:))
-//                            )
-//                        }
-//                    }
                     result(true)
                 }
             }
