@@ -44,6 +44,24 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         onChromeSafariBrowserOpened()
+        
+        let navigationItem = UINavigationItem(title: "Назад")
+        if #available(iOS 13.0, *) {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .close,
+                target: self,
+                action: #selector(self.close(result:))
+            )
+        } else {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .cancel,
+                target: self,
+                action: #selector(self.close(result:))
+            )
+        }
+        DispatchQueue.main.sync {
+            navigationController?.navigationBar.setItems([navigationItem], animated: false)
+        }
     }
     
     public override func viewDidDisappear(_ animated: Bool) {
