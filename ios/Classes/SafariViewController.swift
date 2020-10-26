@@ -51,11 +51,9 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         navigationController?.navigationBar.barTintColor = .darkGray
         //                navigationController.navigationBar.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
         if #available(iOS 13.0, *) {
-            navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(
-                barButtonSystemItem: .close,
-                target: self,
-                action: #selector(self.close(result:))
-            )
+            navigationController?.navigationItem.setRightBarButton(UIBarButtonItem(
+                title: "Назад", style:  .done, target: self, action: #selector(self.close(result:))
+            ), animated: false)
         } else {
             navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(
                 barButtonSystemItem: .cancel,
@@ -63,11 +61,6 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
                 action: #selector(self.close(result:))
             )
         }
-        
-        toolbarItems = [UIBarButtonItem(
-            barButtonSystemItem: .cancel,
-            target: self,
-            action: #selector(self.close(result:)))]
     }
     
     public override func viewDidDisappear(_ animated: Bool) {
@@ -78,24 +71,16 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         var frame = view.frame
         let OffsetY: CGFloat = 64
         frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
         frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
         view.frame = frame
-        
-        view.setNeedsDisplay()
-    }
-    
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        var frame = view.frame
-//        let OffsetY: CGFloat = 64
-//        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-//        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
-//        view.frame = frame
     }
     
     
