@@ -88,13 +88,11 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 safari.delegate = safari
                 safari.safariOptions = safariOptions
                 safari.prepareSafariBrowser()
-                if #available(iOS 10.0, *) {
-                    safari.preferredControlTintColor = .black
-                } else {
-                    // Fallback on earlier versions
-                }
+                
+                let navigationController = UINavigationController(rootViewController: safari)
+                navigationController.title = "Треснутые"
 
-                flutterViewController.present(safari, animated: true) {
+                navigationController.present(safari, animated: true) {
                     var frame = safari.view.frame
                     let OffsetY: CGFloat  = 64
                     frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
