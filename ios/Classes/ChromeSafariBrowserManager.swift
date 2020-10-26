@@ -75,7 +75,6 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                     let config = SFSafariViewController.Configuration()
                     config.entersReaderIfAvailable = true
                     config.barCollapsingEnabled = true
-//                    safari.preferredControlTintColor = .orange
 
                     safari = SafariViewController(url: absoluteUrl, configuration: config)
                 } else {
@@ -89,8 +88,18 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 safari.delegate = safari
                 safari.safariOptions = safariOptions
                 safari.prepareSafariBrowser()
+                if #available(iOS 10.0, *) {
+                    safari.preferredControlTintColor = .black
+                } else {
+                    // Fallback on earlier versions
+                }
 
                 flutterViewController.present(safari, animated: true) {
+                    var frame = safari.view.frame
+                    let OffsetY: CGFloat  = 64
+                    frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+                    frame.size = CGSize(width: frame.width, height: frame.height + OffsetY)
+                    safari.view.frame = frame
                     result(true)
                 }
             }
