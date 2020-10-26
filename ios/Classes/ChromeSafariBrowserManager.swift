@@ -92,7 +92,7 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 let navigationController = UINavigationController(rootViewController: safari)
                 navigationController.title = "Треснутые"
 
-                navigationController.present(safari, animated: true) {
+                flutterViewController.present(navigationController, animated: true) {
                     var frame = safari.view.frame
                     let OffsetY: CGFloat  = 64
                     frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
