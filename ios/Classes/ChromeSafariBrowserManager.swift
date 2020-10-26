@@ -91,24 +91,24 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 safariVC.prepareSafariBrowser()
                 
                 let navigationController = UINavigationController(rootViewController: safariVC)
-                navigationController.title = "Треснутые"
-                navigationController.navigationBar.tintColor = .white
-                navigationController.navigationBar.backgroundColor = .darkGray
-                navigationController.navigationBar.barTintColor = .darkGray
-//                navigationController.navigationBar.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
-                if #available(iOS 13.0, *) {
-                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
-                        barButtonSystemItem: .close,
-                        target: safariVC,
-                        action: #selector(safariVC.close(result:))
-                    )
-                } else {
-                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
-                        barButtonSystemItem: .cancel,
-                        target: safariVC,
-                        action: #selector(safariVC.close(result:))
-                    )
-                }
+//                navigationController.title = "Треснутые"
+//                navigationController.navigationBar.tintColor = .white
+//                navigationController.navigationBar.backgroundColor = .darkGray
+//                navigationController.navigationBar.barTintColor = .darkGray
+////                navigationController.navigationBar.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+//                if #available(iOS 13.0, *) {
+//                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+//                        barButtonSystemItem: .close,
+//                        target: safariVC,
+//                        action: #selector(safariVC.close(result:))
+//                    )
+//                } else {
+//                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+//                        barButtonSystemItem: .cancel,
+//                        target: safariVC,
+//                        action: #selector(safariVC.close(result:))
+//                    )
+//                }
                 navigationController.modalPresentationStyle = .fullScreen
 
                 flutterViewController.present(navigationController, animated: true) {
