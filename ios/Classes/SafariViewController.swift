@@ -28,16 +28,6 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         navigationController?.popViewController(animated: true)
     }
     
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if #available(iOS 13.0, *) {
-            navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: nil, action: #selector(self.close(result:)))
-        } else {
-            // Fallback on earlier versions
-        }
-    }
-    
     public func prepareMethodChannel() {
         channel = FlutterMethodChannel(name: "com.pichillilorenzo/flutter_chromesafaribrowser_" + uuid, binaryMessenger: SwiftFlutterPlugin.instance!.registrar!.messenger())
         SwiftFlutterPlugin.instance!.registrar!.addMethodCallDelegate(self, channel: channel!)
@@ -58,6 +48,13 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     public override func viewWillAppear(_ animated: Bool) {
         // prepareSafariBrowser()
         super.viewWillAppear(animated)
+        
+        if #available(iOS 13.0, *) {
+            navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: nil, action: #selector(self.close(result:)))
+        } else {
+            // Fallback on earlier versions
+        }
+        
         onChromeSafariBrowserOpened()
     }
     
@@ -68,6 +65,8 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     }
     
     public override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
         var frame = view.frame
         let OffsetY: CGFloat  = 64
         frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
