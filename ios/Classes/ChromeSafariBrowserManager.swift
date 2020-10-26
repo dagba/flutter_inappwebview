@@ -94,24 +94,7 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 navigationController.navigationBar.tintColor = .white
                 navigationController.navigationBar.backgroundColor = .darkGray
                 navigationController.navigationBar.barTintColor = .darkGray
-                
-//                if #available(iOS 13.0, *) {
-//                    let item = UIBarButtonItem(
-//                        barButtonSystemItem: .close,
-//                        target: safariVC,
-//                        action: #selector(safariVC.close(result:)))
-//                    item.tintColor = .white
-//                    safariVC.navigationItem.rightBarButtonItem = item
-//                } else {
-//                    safariVC.navigationItem.rightBarButtonItem = UIBarButtonItem(
-//                        barButtonSystemItem: .cancel,
-//                        target: safariVC,
-//                        action: #selector(safariVC.close(result:))
-//                    )
-//                }
-                
                 navigationController.modalPresentationStyle = .currentContext
-                safariVC.title = "Треснутые"
                 
                 flutterViewController.present(navigationController, animated: true) {
                     result(true)
