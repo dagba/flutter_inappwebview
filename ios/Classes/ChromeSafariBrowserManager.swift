@@ -87,13 +87,16 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 safariVC.prepareMethodChannel()
                 safariVC.delegate = safariVC
                 safariVC.safariOptions = safariOptions
+                safariVC.title = "Треснутые"
                 safariVC.prepareSafariBrowser()
                 
                 let navigationController = UINavigationController(rootViewController: safariVC)
                 navigationController.title = "Треснутые"
-                navigationController.navigationBar.tintColor = .blue
+                navigationController.navigationBar.tintColor = .white
+                navigationController.navigationBar.backgroundColor = .darkGray
+//                navigationController.navigationBar.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
                 if #available(iOS 13.0, *) {
-                    navigationController.navigationItem.backBarButtonItem = UIBarButtonItem(
+                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
                         barButtonSystemItem: .close,
                         target: safariVC,
                         action: #selector(safariVC.close(result:))
@@ -106,8 +109,6 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                     )
                 }
                 navigationController.modalPresentationStyle = .fullScreen
-                
-                safariVC.title = "Треснутые"
 
                 flutterViewController.present(navigationController, animated: true) {
                     result(true)

@@ -54,16 +54,17 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+    
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         var frame = view.frame
         let OffsetY: CGFloat = 64
         frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
         frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
         view.frame = frame
-    }
-    
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     
