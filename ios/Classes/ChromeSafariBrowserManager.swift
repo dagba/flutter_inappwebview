@@ -69,30 +69,44 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 let safariOptions = SafariBrowserOptions()
                 let _ = safariOptions.parse(options: options)
 
-                let safari: SafariViewController
+                let safariVC: SafariViewController
 
                 if #available(iOS 11.0, *) {
                     let config = SFSafariViewController.Configuration()
                     config.entersReaderIfAvailable = true
                     config.barCollapsingEnabled = true
 
-                    safari = SafariViewController(url: absoluteUrl, configuration: config)
+                    safariVC = SafariViewController(url: absoluteUrl, configuration: config)
                 } else {
                     // Fallback on earlier versions
-                    safari = SafariViewController(url: absoluteUrl)
+                    safariVC = SafariViewController(url: absoluteUrl)
                 }
 
-                safari.uuid = uuid
-                safari.menuItemList = menuItemList
-                safari.prepareMethodChannel()
-                safari.delegate = safari
-                safari.safariOptions = safariOptions
-                safari.prepareSafariBrowser()
+                safariVC.uuid = uuid
+                safariVC.menuItemList = menuItemList
+                safariVC.prepareMethodChannel()
+                safariVC.delegate = safariVC
+                safariVC.safariOptions = safariOptions
+                safariVC.prepareSafariBrowser()
                 
-                let navigationController = UINavigationController(rootViewController: safari)
+                let navigationController = UINavigationController(rootViewController: safariVC)
                 navigationController.title = "Треснутые"
+                navigationController.navigationBar.tintColor = .blue
+                if #available(iOS 13.0, *) {
+                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+                        barButtonSystemItem: .close,
+                        target: safariVC,
+                        action: #selector(safariVC.close(result:))
+                    )
+                } else {
+                    navigationController.navigationItem.leftBarButtonItem = UIBarButtonItem(
+                        barButtonSystemItem: .cancel,
+                        target: safariVC,
+                        action: #selector(safariVC.close(result:))
+                    )
+                }
                 
-                safari.title = "Треснутые"
+                safariVC.title = "Треснутые"
 
                 flutterViewController.present(navigationController, animated: true) {
                     result(true)

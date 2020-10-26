@@ -24,10 +24,6 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         print("SafariViewController - dealloc")
     }
     
-    @objc func close(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        navigationController?.popViewController(animated: true)
-    }
-    
     public func prepareMethodChannel() {
         channel = FlutterMethodChannel(name: "com.pichillilorenzo/flutter_chromesafaribrowser_" + uuid, binaryMessenger: SwiftFlutterPlugin.instance!.registrar!.messenger())
         SwiftFlutterPlugin.instance!.registrar!.addMethodCallDelegate(self, channel: channel!)
@@ -49,18 +45,6 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         // prepareSafariBrowser()
         super.viewWillAppear(animated)
         
-        navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .cancel,
-            target: nil,
-            action: #selector(self.close(result:))
-        )
-        
-        var frame = view.frame
-        let OffsetY: CGFloat = 64
-        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.5))
-        view.frame = frame
-        
         onChromeSafariBrowserOpened()
     }
     
@@ -72,6 +56,10 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     
     public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         var frame = view.frame
         let OffsetY: CGFloat = 64
@@ -90,9 +78,8 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
             if !(safariOptions?.preferredBarTintColor.isEmpty)! {
                 self.preferredBarTintColor = color(fromHexString: (safariOptions?.preferredBarTintColor)!)
             }
-            self.preferredControlTintColor = .orange
             if !(safariOptions?.preferredControlTintColor.isEmpty)! {
-                //                self.preferredControlTintColor = color(fromHexString: (safariOptions?.preferredControlTintColor)!)
+                                self.preferredControlTintColor = color(fromHexString: (safariOptions?.preferredControlTintColor)!)
             }
         }
         
