@@ -110,8 +110,8 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
 //                }
                 navigationController.title = "Треснутые"
                 navigationController.navigationBar.tintColor = .white
-                navigationController.navigationBar.backgroundColor = UIColor(red: 36, green: 38, blue: 43, alpha: 1)
-                navigationController.navigationBar.barTintColor = UIColor(red: 36, green: 38, blue: 43, alpha: 1)
+                navigationController.navigationBar.backgroundColor = .darkGray
+                navigationController.navigationBar.barTintColor = .darkGray
                 
                 navigationController.modalPresentationStyle = .fullScreen
                 safariVC.title = "Треснутые"
