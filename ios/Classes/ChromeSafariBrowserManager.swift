@@ -91,11 +91,6 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 safari.prepareSafariBrowser()
 
                 flutterViewController.present(safari, animated: true) {
-                        var frame = safari.view.frame
-    let OffsetY: CGFloat  = 64
-    frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-    frame.size = CGSize(width: frame.width, height: frame.height + OffsetY + OffsetY)
-    safari.view.frame = frame
                     result(true)
                 }
             }
