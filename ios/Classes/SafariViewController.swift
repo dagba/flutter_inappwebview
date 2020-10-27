@@ -48,7 +48,7 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
             title: "Закрыть",
             style: .plain,
             target: self,
-            action: #selector(self.close(result:)))
+            action: #selector(self.pop(result:)))
         item.tintColor = .white
         navigationItem.rightBarButtonItem = item
         
@@ -103,6 +103,17 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         
         self.modalPresentationStyle = UIModalPresentationStyle(rawValue: (safariOptions?.presentationStyle)!)!
         self.modalTransitionStyle = UIModalTransitionStyle(rawValue: (safariOptions?.transitionStyle)!)!
+    }
+    
+    @objc func pop(result: FlutterResult?) {
+        navigationController?.dismiss(animated: true)
+        
+        // wait for the animation
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {() -> Void in
+            if result != nil {
+                result!(true)
+            }
+        })
     }
     
     @objc func close(result: FlutterResult?) {
