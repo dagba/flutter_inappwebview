@@ -46,7 +46,7 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         
         let item = UIBarButtonItem(
             title: "Закрыть",
-            style: .done,
+            style: .plain,
             target: self,
             action: #selector(self.close(result:)))
         item.tintColor = .white
