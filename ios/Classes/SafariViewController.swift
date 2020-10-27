@@ -44,13 +44,13 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        let item = UIBarButtonItem(
-            title: "Закрыть",
-            style: .plain,
-            target: self,
-            action: #selector(self.pop(result:)))
-        item.tintColor = .white
-        navigationItem.rightBarButtonItem = item
+//        let item = UIBarButtonItem(
+//            title: "Закрыть",
+//            style: .plain,
+//            target: self,
+//            action: #selector(self.pop(result:)))
+//        item.tintColor = .white
+//        navigationItem.rightBarButtonItem = item
         
         view.backgroundColor = .darkGray
     }
@@ -103,19 +103,6 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         
         self.modalPresentationStyle = UIModalPresentationStyle(rawValue: (safariOptions?.presentationStyle)!)!
         self.modalTransitionStyle = UIModalTransitionStyle(rawValue: (safariOptions?.transitionStyle)!)!
-    }
-    
-    @objc func pop(result: FlutterResult?) {
-        DispatchQueue.main.async { [weak self] in
-            self?.navigationController?.dismiss(animated: true)
-            
-            // wait for the animation
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {() -> Void in
-                if result != nil {
-                    result!(true)
-                }
-            })
-        }
     }
     
     @objc func close(result: FlutterResult?) {

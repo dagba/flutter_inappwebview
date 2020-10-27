@@ -90,7 +90,7 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 safariVC.prepareSafariBrowser()
                 safariVC.view.backgroundColor = .darkGray
                 
-                var navigationController = UINavigationController(rootViewController: safariVC)
+                let navigationController = UINavigationController(rootViewController: safariVC)
                 
                 navigationController.navigationBar.tintColor = .white
                 navigationController.navigationBar.backgroundColor = .darkGray
