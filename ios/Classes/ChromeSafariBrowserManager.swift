@@ -96,8 +96,6 @@ public class ChromeSafariBrowserManager: NSObject, FlutterPlugin {
                 navigationController.navigationBar.backgroundColor = .darkGray
                 navigationController.navigationBar.barTintColor = .darkGray
                 
-                navigationController.modalPresentationStyle = .popover
-                
                 flutterViewController.present(navigationController, animated: true) {
                     result(true)
                 }
