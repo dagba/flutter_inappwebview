@@ -106,14 +106,16 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     }
     
     @objc func pop(result: FlutterResult?) {
-        navigationController?.dismiss(animated: true)
-        
-        // wait for the animation
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {() -> Void in
-            if result != nil {
-                result!(true)
-            }
-        })
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.dismiss(animated: true)
+            
+            // wait for the animation
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {() -> Void in
+                if result != nil {
+                    result!(true)
+                }
+            })
+        }
     }
     
     @objc func close(result: FlutterResult?) {
