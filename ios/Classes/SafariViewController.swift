@@ -45,11 +45,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         super.viewWillAppear(animated)
         onChromeSafariBrowserOpened()
 
-        // var frame = view.frame
-        // let OffsetY: CGFloat = 60
-        // frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-        // frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.2))
-        // view.frame = frame
+        var frame = view.frame
+        let OffsetY: CGFloat = 56
+        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.8))
+        view.frame = frame
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
@@ -65,11 +65,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        // var frame = view.frame
-        // let OffsetY: CGFloat = 60
-        // frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-        // frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.2))
-        // view.frame = frame
+        var frame = view.frame
+        let OffsetY: CGFloat = 56
+        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.8))
+        view.frame = frame
     }
 
 
@@ -122,6 +122,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
             let activity = CustomUIActivity(uuid: uuid, id: menuItem["id"] as! Int64, url: URL, title: title, label: menuItem["label"] as? String, type: nil, image: nil)
             uiActivities.append(activity)
         }
+        
+        if URL.absoluteString.contains("dixyapp://ru.dixy.release/game") {
+            close(result: nil)
+        }
+        
         return uiActivities
     }
     //
@@ -132,10 +137,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     //        return []
     //    }
     //
-    //    public func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
-    //        print("initialLoadDidRedirectTo")
-    //        print(URL)
-    //    }
+        public func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
+            if URL.absoluteString.contains("dixyapp://ru.dixy.release/game") {
+                close(result: nil)
+            }
+        }
 
     public func onChromeSafariBrowserOpened() {
         channel!.invokeMethod("onChromeSafariBrowserOpened", arguments: [])
