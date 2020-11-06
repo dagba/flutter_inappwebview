@@ -45,11 +45,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         super.viewWillAppear(animated)
         onChromeSafariBrowserOpened()
 
-        var frame = view.frame
-        let OffsetY: CGFloat = 60
-        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.2))
-        view.frame = frame
+        // var frame = view.frame
+        // let OffsetY: CGFloat = 60
+        // frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+        // frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.2))
+        // view.frame = frame
     }
 
     public override func viewDidDisappear(_ animated: Bool) {
@@ -65,11 +65,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        var frame = view.frame
-        let OffsetY: CGFloat = 60
-        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.2))
-        view.frame = frame
+        // var frame = view.frame
+        // let OffsetY: CGFloat = 60
+        // frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+        // frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.2))
+        // view.frame = frame
     }
 
 
