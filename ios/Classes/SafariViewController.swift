@@ -10,25 +10,25 @@ import SafariServices
 
 @available(iOS 9.0, *)
 public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafariViewControllerDelegate {
-    
+
     var channel: FlutterMethodChannel?
     var safariOptions: SafariBrowserOptions?
     var uuid: String = ""
     var menuItemList: [[String: Any]] = []
-    
+
     public static func register(with registrar: FlutterPluginRegistrar) {
-        
+
     }
-    
+
     deinit {
         print("SafariViewController - dealloc")
     }
-    
+
     public func prepareMethodChannel() {
         channel = FlutterMethodChannel(name: "com.pichillilorenzo/flutter_chromesafaribrowser_" + uuid, binaryMessenger: SwiftFlutterPlugin.instance!.registrar!.messenger())
         SwiftFlutterPlugin.instance!.registrar!.addMethodCallDelegate(self, channel: channel!)
     }
-    
+
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         // let arguments = call.arguments as? NSDictionary
         switch call.method {
@@ -40,58 +40,44 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
                 break
         }
     }
-    
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        let item = UIBarButtonItem(
-//            title: "Закрыть",
-//            style: .plain,
-//            target: self,
-//            action: #selector(self.pop(result:)))
-//        item.tintColor = .white
-//        navigationItem.rightBarButtonItem = item
-        
-        view.backgroundColor = .darkGray
-    }
-    
+
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         onChromeSafariBrowserOpened()
-        
+
         var frame = view.frame
         let OffsetY: CGFloat = 64
         frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
         frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.2))
         view.frame = frame
     }
-    
+
     public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.onChromeSafariBrowserClosed()
         self.dispose()
     }
-    
+
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
+
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         var frame = view.frame
         let OffsetY: CGFloat = 64
         frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
         frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.2))
         view.frame = frame
     }
-    
-    
+
+
     func prepareSafariBrowser() {
         if #available(iOS 11.0, *) {
             self.dismissButtonStyle = SFSafariViewController.DismissButtonStyle(rawValue: (safariOptions?.dismissButtonStyle)!)!
         }
-        
+
         if #available(iOS 10.0, *) {
             if !(safariOptions?.preferredBarTintColor.isEmpty)! {
                 self.preferredBarTintColor = color(fromHexString: (safariOptions?.preferredBarTintColor)!)
@@ -100,14 +86,14 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
                                 self.preferredControlTintColor = color(fromHexString: (safariOptions?.preferredControlTintColor)!)
             }
         }
-        
+
         self.modalPresentationStyle = UIModalPresentationStyle(rawValue: (safariOptions?.presentationStyle)!)!
         self.modalTransitionStyle = UIModalTransitionStyle(rawValue: (safariOptions?.transitionStyle)!)!
     }
-    
+
     @objc func close(result: FlutterResult?) {
         dismiss(animated: true)
-        
+
         // wait for the animation
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400), execute: {() -> Void in
             if result != nil {
@@ -115,11 +101,11 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
             }
         })
     }
-    
+
     public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         close(result: nil)
     }
-    
+
     public func safariViewController(_ controller: SFSafariViewController,
                                      didCompleteInitialLoad didLoadSuccessfully: Bool) {
         if didLoadSuccessfully {
@@ -129,7 +115,7 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
             print("Cant load successfully the 'SafariViewController'.")
         }
     }
-    
+
     public func safariViewController(_ controller: SFSafariViewController, activityItemsFor URL: URL, title: String?) -> [UIActivity] {
         var uiActivities: [UIActivity] = []
         menuItemList.forEach { (menuItem) in
@@ -150,41 +136,41 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
     //        print("initialLoadDidRedirectTo")
     //        print(URL)
     //    }
-    
+
     public func onChromeSafariBrowserOpened() {
         channel!.invokeMethod("onChromeSafariBrowserOpened", arguments: [])
     }
-    
+
     public func onChromeSafariBrowserCompletedInitialLoad() {
         channel!.invokeMethod("onChromeSafariBrowserCompletedInitialLoad", arguments: [])
     }
-    
+
     public func onChromeSafariBrowserClosed() {
         channel!.invokeMethod("onChromeSafariBrowserClosed", arguments: [])
     }
-    
+
     public func dispose() {
         delegate = nil
         channel!.setMethodCallHandler(nil)
     }
-    
+
     // Helper function to convert hex color string to UIColor
     // Assumes input like "#00FF00" (#RRGGBB).
     // Taken from https://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string
     func color(fromHexString: String, alpha:CGFloat? = 1.0) -> UIColor {
-        
+
         // Convert hex string to an integer
         let hexint = Int(self.intFromHexString(hexStr: fromHexString))
         let red = CGFloat((hexint & 0xff0000) >> 16) / 255.0
         let green = CGFloat((hexint & 0xff00) >> 8) / 255.0
         let blue = CGFloat((hexint & 0xff) >> 0) / 255.0
         let alpha = alpha!
-        
+
         // Create color object, specifying alpha as well
         let color = UIColor(red: red, green: green, blue: blue, alpha: alpha)
         return color
     }
-    
+
     func intFromHexString(hexStr: String) -> UInt32 {
         var hexInt: UInt32 = 0
         // Create scanner
@@ -205,7 +191,7 @@ class CustomUIActivity : UIActivity {
     var type: UIActivity.ActivityType?
     var label: String?
     var image: UIImage?
-    
+
     init(uuid: String, id: Int64, url: URL, title: String?, label: String?, type: UIActivity.ActivityType?, image: UIImage?) {
         self.uuid = uuid
         self.id = id
@@ -215,30 +201,30 @@ class CustomUIActivity : UIActivity {
         self.type = type
         self.image = image
     }
-    
+
     override class var activityCategory: UIActivity.Category {
         return .action
     }
-    
+
     override var activityType: UIActivity.ActivityType? {
         return type
     }
-    
+
     override var activityTitle: String? {
         return label
     }
-    
+
     override var activityImage: UIImage? {
         return image
     }
-    
+
     override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         return true
     }
-    
+
     override func perform() {
         let channel = FlutterMethodChannel(name: "com.pichillilorenzo/flutter_chromesafaribrowser_" + uuid, binaryMessenger: SwiftFlutterPlugin.instance!.registrar!.messenger())
-        
+
         let arguments: [String: Any?] = [
             "url": url.absoluteString,
             "title": title,
