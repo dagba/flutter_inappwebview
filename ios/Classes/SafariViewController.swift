@@ -48,7 +48,7 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
         var frame = view.frame
         let OffsetY: CGFloat = 56
         
-        if (frame.height > 667) {
+        if (UIScreen.main.bounds.height > 667) {
             frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
             frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.8))
         } else {
@@ -74,8 +74,13 @@ public class SafariViewController: SFSafariViewController, FlutterPlugin, SFSafa
 
         var frame = view.frame
         let OffsetY: CGFloat = 56
-        frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
-        frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.8))
+        if (UIScreen.main.bounds.height > 667) {
+            frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+            frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2.8))
+        } else {
+            frame.origin = CGPoint(x: frame.origin.x, y: frame.origin.y - OffsetY)
+            frame.size = CGSize(width: frame.width, height: frame.height + (OffsetY * 2))
+        }
         view.frame = frame
     }
 
